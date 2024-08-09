@@ -81,3 +81,26 @@ footer {
     width: 100%;
 }
 
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+
+    .news-item h2 {
+        font-size: 1.2em;
+    }
+
+    .news-item p {
+        font-size: 0.9em;
+    }
+
+    .news-item {
+        padding: 15px;
+    }
+
+    /* Adjust iframe height for mobile */
+    .full-content iframe {
+        height: 300px; /* Smaller height for mobile */
+    }
+}
