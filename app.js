@@ -8,11 +8,13 @@ const newsData = [
         summary: "To test the embedded sales overview report with app",
         fullContent: `
             <iframe 
+                id="powerbi-embed" 
                 width="100%" 
                 height="500px" 
                 src="https://app.powerbi.com/reportEmbed?reportId=9ddf2745-cb33-409c-99e0-cab209daf028&autoAuth=true&ctid=9c21bf6f-39b9-4076-94e0-3f72bcf282a9" 
                 frameborder="0" 
-                allowFullScreen="true"></iframe>
+                allowFullScreen="true">
+            </iframe>
         `
     }
 ];
@@ -29,15 +31,19 @@ function displayNews() {
             <h2>${news.title}</h2>
             <p>${news.summary}</p>
             <a href="#" class="read-more">Read more</a>
-            <p class="full-content hidden">${news.fullContent}</p>
+            <div class="full-content hidden">${news.fullContent}</div>
         `;
 
-        // Add event listener to toggle the visibility of the full content
         newsItem.querySelector('.read-more').addEventListener('click', function(event) {
             event.preventDefault();
             const fullContent = newsItem.querySelector('.full-content');
             fullContent.classList.toggle('hidden');
             this.textContent = fullContent.classList.contains('hidden') ? 'Read more' : 'Read less';
+
+            if (!fullContent.classList.contains('hidden')) {
+                const iframe = fullContent.querySelector('iframe');
+                iframe.height = window.innerWidth < 768 ? '300px' : '500px'; // Adjust iframe height based on screen size
+            }
         });
 
         newsList.appendChild(newsItem);
